@@ -5,12 +5,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Dashboard from "./components/layout/Dashboard";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Pokemon from "./components/pokemon/Pokemon";
-// import backgroundImage from "./pattern.png";
+import backgroundImage from "./pattern.png";
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div
+        className="App"
+        style={{
+          background: `url(${backgroundImage})`,
+        }}
+      >
         <NavBar />
         <div className="container" id="cont">
           <Switch>

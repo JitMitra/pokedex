@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { type } from "@testing-library/user-event/dist/type";
 
 export default class Pokemon extends Component {
   state = {
-    name: ``,
-    pokemonIndex: ``,
-    imageUrl: ``,
+    name: "",
+    pokemonIndex: "",
+    imageUrl: "",
     types: [],
-    description: ``,
+    description: "",
     stats: {
       hp: "",
       attack: "",
       defense: "",
+      speed: "",
       specialAttack: "",
       specialDefense: "",
     },
@@ -22,7 +21,7 @@ export default class Pokemon extends Component {
     eggGroup: "",
     abilities: "",
     genderRatioMale: "",
-    genderRatioFemale: "",
+    genderRationFemale: "",
     evs: "",
     hatchSteps: "",
   };
@@ -30,58 +29,57 @@ export default class Pokemon extends Component {
   async componentDidMount() {
     const { pokemonIndex } = this.props.match.params;
 
+    //Urls for pokemon informations
     const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex}/`;
     const pokemonSpeciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${pokemonIndex}/`;
 
+    // Get pokemon info
+
     const pokemonRes = await axios.get(pokemonUrl);
     const name = pokemonRes.data.name;
+    const imageUrl = pokemonRes.data.sprites.fornt_default;
 
-    const imageUrl = pokemonRes.data.sprites.front_default;
-
-    let { hp, attack, defense, speed, specialAttack, specialDefense } = ``;
+    let { hp, attack, defense, speed, specialAttack, specialDefense } = "";
 
     pokemonRes.data.stats.map((stat) => {
       switch (stat.stat.name) {
-        case `hp`:
-          hp = stat[`base_stat`];
+        case "hp":
+          hp = stat["base_stat"];
           break;
-        case `attack`:
-          attack = stat[`base_stat`];
+        case "attack":
+          attack = stat["base_stat"];
           break;
-        case `defense`:
-          defense = stat[`base_stat`];
+        case "defense":
+          defense = stat["base_stat"];
           break;
-        case `speed`:
-          speed = stat[`base_stat`];
+        case "speed":
+          speed = stat["base_stat"];
           break;
-        case `special-attack`:
-          specialAttack = stat[`base_stat`];
+        case "special-attack":
+          specialAttack = stat["base_stat"];
           break;
-        case `special-defense`:
-          specialDefense = stat[`base_stat`];
+        case "special-defense":
+          specialDefense = stat["base_stat"];
           break;
       }
     });
-    // Convert Decimeters to Feet... The + 0.0001 * 100 ) / 100 is for rounding to two decimal places :)
-    const height =
-      Math.round((pokemonRes.data.height * 0.328084 + 0.00001) * 100) / 100;
 
+    // Convert Decimeters to feet..
+    const height =
+      Math.round((pokemonRes.data.height * 0.328084 + 0.0001) * 100) / 100;
+    //Converts hectogram to pounds
     const weight =
-      Math.round((pokemonRes.data.weight * 0.220462 + 0.00001) * 100) / 100;
+      Math.round((pokemonRes.data.weight * 0.220462 + 0.0001) * 100) / 100;
 
     const types = pokemonRes.data.types.map((type) => type.type.name);
 
-    // const themeColor = `${TYPE_COLORS[types[types.length - 1]]}`;
-
-    const abilities = pokemonRes.data.abilities
-      .map((ability) => {
-        return ability.ability.name
-          .toLowerCase()
-          .split("-")
-          .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-          .join(" ");
-      })
-      .join(", ");
+    const abilities = pokemonRes.data.abilities.map((ability) => {
+      return ability.ability.name
+        .toLowercase()
+        .split("-")
+        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+        .join(" ");
+    });
 
     const evs = pokemonRes.data.stats
       .filter((stat) => {
@@ -91,15 +89,16 @@ export default class Pokemon extends Component {
         return false;
       })
       .map((stat) => {
-        return `${stat.effort} ${stat.stat.name
-          .toLowerCase()
+        return `${stat.effort} ${stat.name}`
+          .toLowercase()
           .split("-")
           .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-          .join(" ")}`;
+          .join(" ");
       })
       .join(", ");
 
-    // Get Pokemon Description .... Is from a different end point uggh
+    //Get pokemon Description, catch Rate , EggGroups, Gender Ratio, Hatch Steps
+
     await axios.get(pokemonSpeciesUrl).then((res) => {
       let description = "";
       res.data.flavor_text_entries.some((flavor) => {
@@ -108,17 +107,18 @@ export default class Pokemon extends Component {
           return;
         }
       });
-      const femaleRate = res.data["gender_rate"];
-      const genderRatioFemale = 12.5 * femaleRate;
-      const genderRatioMale = 12.5 * (8 - femaleRate);
+
+      const felmaleRate = res.data["gender_rate"];
+      const genderRatioFemale = 12.5 * felmaleRate;
+      const genderRatioMale = 12.5(8 - felmaleRate);
 
       const catchRate = Math.round((100 / 255) * res.data["capture_rate"]);
 
       const eggGroups = res.data["egg_groups"]
         .map((group) => {
           return group.name
-            .toLowerCase()
-            .split(" ")
+            .toLowercase()
+            .split("-")
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(" ");
         })
@@ -149,13 +149,11 @@ export default class Pokemon extends Component {
         specialAttack,
         specialDefense,
       },
-      // themeColor,
       height,
       weight,
       abilities,
       evs,
     });
-    this.setState({ name });
   }
   render() {
     return (
@@ -163,18 +161,7 @@ export default class Pokemon extends Component {
         <div className="card">
           <div className="card-header">
             <div className="row">
-              <div className="col-5">
-                <h5>{this.state.pokemonIndex}</h5>
-              </div>
-              <div className="col-7">
-                <div className="float-end">
-                  {this.state.types.map((type) => {
-                    <span key={type} className="badge badge-pill mr-1">
-                      {type}
-                    </span>;
-                  })}
-                </div>
-              </div>
+              <h5>{this.state.pokemonIndex}</h5>
             </div>
           </div>
         </div>
