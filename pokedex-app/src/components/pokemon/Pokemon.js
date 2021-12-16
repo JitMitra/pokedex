@@ -223,6 +223,25 @@ export default class Pokemon extends Component {
                       .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                       .join(" ")}
                   </h4>
+                  <div className="row align-items-center">
+                    <div className="col-12 col-md-3">HP</div>
+                    <div className="col-12 col-md-9">
+                      <div className="progress">
+                        <div
+                          className="progress-bar"
+                          role="progressbar"
+                          style={{
+                            width: `${this.state.stats.hp}%`,
+                          }}
+                          area-valuenow="25"
+                          area-valuemin="0"
+                          area-vlauemax="100"
+                        >
+                          <small>{this.state.stats.hp}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
