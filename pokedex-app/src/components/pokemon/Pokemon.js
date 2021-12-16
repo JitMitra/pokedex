@@ -242,6 +242,172 @@ export default class Pokemon extends Component {
                       </div>
                     </div>
                   </div>
+                  <div className="row align-items-center">
+                    <div className="col-12 col-md-3">Attack</div>
+                    <div className="col-12 col-md-9">
+                      <div className="progress">
+                        <div
+                          className="progress-bar"
+                          role="progressbar"
+                          style={{
+                            width: `${this.state.stats.attack}%`,
+                          }}
+                          area-valuenow="25"
+                          area-valuemin="0"
+                          area-vlauemax="100"
+                        >
+                          <small>{this.state.stats.attack}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row align-items-center">
+                    <div className="col-12 col-md-3">Defense</div>
+                    <div className="col-12 col-md-9">
+                      <div className="progress">
+                        <div
+                          className="progress-bar"
+                          role="progressbar"
+                          style={{
+                            width: `${this.state.stats.defense}%`,
+                          }}
+                          area-valuenow="25"
+                          area-valuemin="0"
+                          area-vlauemax="100"
+                        >
+                          <small>{this.state.stats.defense}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row align-items-center">
+                    <div className="col-12 col-md-3">Speed</div>
+                    <div className="col-12 col-md-9">
+                      <div className="progress">
+                        <div
+                          className="progress-bar"
+                          role="progressbar"
+                          style={{
+                            width: `${this.state.stats.speed}%`,
+                          }}
+                          area-valuenow="25"
+                          area-valuemin="0"
+                          area-vlauemax="100"
+                        >
+                          <small>{this.state.stats.speed}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row align-items-center">
+                    <div className="col-12 col-md-3">Special Attack</div>
+                    <div className="col-12 col-md-9">
+                      <div className="progress">
+                        <div
+                          className="progress-bar"
+                          role="progressbar"
+                          style={{
+                            width: `${this.state.stats.specialAttack}%`,
+                          }}
+                          area-valuenow="25"
+                          area-valuemin="0"
+                          area-vlauemax="100"
+                        >
+                          <small>{this.state.stats.specialAttack}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row align-items-center">
+                    <div className="col-12 col-md-3">Special Defense</div>
+                    <div className="col-12 col-md-9">
+                      <div className="progress">
+                        <div
+                          className="progress-bar"
+                          role="progressbar"
+                          style={{
+                            width: `${this.state.stats.specialDefense}%`,
+                          }}
+                          area-valuenow="25"
+                          area-valuemin="0"
+                          area-vlauemax="100"
+                        >
+                          <small>{this.state.stats.specialDefense}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row mt-1">
+                    <div className="col">
+                      <p className="mr-5 ml-5 mt-3 alert alert-secondary">
+                        {this.state.description}
+                      </p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="card-body">
+                    <div className="card-title text-center">
+                      <h5>Profile</h5>
+                      <div className="row">
+                        <div className="col-md-6">
+                          <div className="row">
+                            <div className="col-md-6">
+                              <h6 className="float-right">Height</h6>
+                            </div>
+                            <div className="col-md-6">
+                              <h6 className="float-left">
+                                {this.state.height} ft
+                              </h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-md-6">
+                          <div className="row">
+                            <div className="col-md-6">
+                              <h6 className="float-right">Weight</h6>
+                            </div>
+                            <div className="col-md-6">
+                              <h6 className="float-left">
+                                {this.state.weight} pound
+                              </h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-md-6">
+                          <div className="row">
+                            <div className="col-md-6">
+                              <h6 className="float-right">Catch Rate</h6>
+                            </div>
+                            <div className="col-md-6">
+                              <h6 className="float-left">
+                                {this.state.catchRate} %
+                              </h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-md-6">
+                          <div className="row">
+                            <div className="col-md-6">
+                              <h6 className="float-right">
+                                Gender Ratio Female
+                              </h6>
+                            </div>
+                            <div className="col-md-6">
+                              <h6 className="float-left">
+                                {this.state.genderRatioFemale}
+                              </h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
